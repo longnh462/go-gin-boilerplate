@@ -1,5 +1,5 @@
 services: 
-  database:
+  go-gin-db:
     image: postgres:latest
     container_name: go-gin-boilerplate-db
     environment:
@@ -12,3 +12,7 @@ services:
       - "${POSTGRES_PORT}:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+    driver: local
