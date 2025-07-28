@@ -38,12 +38,12 @@ In this project, I built a template for the Backend part written in Go and using
 
 ## Features
 
-- [ ] Database. Support [GORM](https://gorm.io/index.html) and [Postgres](https://github.com/lib/pq).
+- [x] Database. Support [GORM](https://gorm.io/index.html) and [Postgres](https://github.com/lib/pq).
 - [ ] Seeding.
 - [ ] Mailing ([viper](https://github.com/spf13/viper)).
 - [ ] Sign in and sign up via email.
 - [ ] Social sign in (Apple, Facebook, Google).
-- [ ] Admin and User roles.
+- [x] Admin and User roles.
 - [ ] Internationalization/Translations (I18N) ([go-i18n](https://github.com/nicksnyder/go-i18n)).
 - [ ] File uploads. Support local and Amazon S3 drivers.
 - [x] Swagger.
