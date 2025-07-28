@@ -3,7 +3,7 @@ package entitys
 type UserEntity struct {
 	BaseEntity
 
-	UserId     string `json:"userId" gorm:"uniqueIndex;not null; size: 20"`
+	UserId     string `json:"userId" gorm:"primaryKey;uniqueIndex;not null; size: 20"`
 	Email      string `json:"email" gorm:"uniqueIndex;not null;size:50"`
 	Username   string `json:"username" gorm:"uniqueIndex;not null;size:50"`
 	Password   string `json:"-" gorm:"not null;size:50"`
@@ -12,4 +12,7 @@ type UserEntity struct {
 	Phone      string `json:"phone" gorm:"not null;size:11"`
 	IsActive   bool   `json:"isActive" gorm:"default:false"`
 	IsVerified bool   `json:"isVerified" gorm:"default:false"`
+
+	UserRoles []UserRole   `json:"userRoles,omitempty" gorm:"foreignKey:UserID"`
+	Roles     []RoleEntity `json:"roles,omitempty" gorm:"many2many:user_roles;"`
 }

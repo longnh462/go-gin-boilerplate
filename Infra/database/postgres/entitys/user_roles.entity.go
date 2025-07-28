@@ -1,13 +1,14 @@
 package entitys
 
 type UserRole struct {
-    BaseEntity            
-    
-    UserID   uint `json:"userId" gorm:"not null;index"`
-    RoleID   uint `json:"roleId" gorm:"not null;index"`
-    IsActive bool `json:"isActive" gorm:"default:true"`
-    
+    BaseEntity
+
+    UserRoleId string `json:"userRoleId" gorm:"primaryKey;not null;size:20"`
+    UserID     string `json:"userId" gorm:"not null;index;size:20"`
+    RoleID     string `json:"roleId" gorm:"not null;index;size:20"`
+    IsActive   bool   `json:"isActive" gorm:"default:true"`
+
     // Relationships
-    User     UserEntity `json:"user,omitempty" gorm:"foreignKey:UserID"`
-    Role     RoleEntity `json:"role,omitempty" gorm:"foreignKey:RoleID"`
+    User UserEntity `json:"user,omitempty" gorm:"foreignKey:UserID;references:UserId"`
+    Role RoleEntity `json:"role,omitempty" gorm:"foreignKey:RoleID;references:RoleId"`
 }
