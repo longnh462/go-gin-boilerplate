@@ -40,6 +40,7 @@ In this project, I built a template for the Backend part written in Go and using
 
 - [x] Database. Support [GORM](https://gorm.io/index.html) and [Postgres](https://github.com/lib/pq).
 - [ ] Seeding.
+- [ ] Authentication - Single session per user
 - [ ] Mailing ([viper](https://github.com/spf13/viper)).
 - [ ] Sign in and sign up via email.
 - [ ] Social sign in (Apple, Facebook, Google).
@@ -56,16 +57,17 @@ In this project, I built a template for the Backend part written in Go and using
 ```
 git clone https://github.com/longnh462/go-gin-boilerplate
 ```
-2. Install neccessary dependencies
+2. Create and copy this part into env file
+```
+cp env.example .env
+```
+3. Install neccessary dependencies
 
 ```
 go mod download
 ```
 
-3. Create and copy this part into env file
-```
-cp env.example .env
-```
+
 
 ## Contact
 Feel free to react out through any of these channels:
