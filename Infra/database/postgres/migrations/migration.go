@@ -10,5 +10,6 @@ func AutoMigrate(db *gorm.DB) error {
         &entitys.UserEntity{},
         &entitys.RoleEntity{},
         &entitys.UserRole{},
+        &entitys.SessionEntity{},
     )
 }
