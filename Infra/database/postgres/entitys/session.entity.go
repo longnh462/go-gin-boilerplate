@@ -11,7 +11,7 @@ type SessionEntity struct {
 	LastActive time.Time `json:"lastActive" gorm:"not null"`
 	IPAddress  string    `json:"ipAddress" gorm:"not null;size:45"` // IPv4 or IPv6
 	UserAgent  string    `json:"userAgent" gorm:"not null;size:255"`
-	IsActive   bool      `json:"isActive" gorm:"default:false"`
+	IsActive   bool      `json:"isActive" gorm:"default:true"`
 
 	User UserEntity `json:"user,omitempty" gorm:"foreignKey:UserId;references:UserId"`
 }
