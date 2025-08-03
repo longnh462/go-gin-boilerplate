@@ -107,13 +107,13 @@ func (as *AuthService) ValidateToken(tokenString string) (*jwt.Claims, error) {
 
 	// Nếu token từ Keycloak, có thể validate thêm với Keycloak
 	// (Optional - có thể bỏ qua để giảm API calls)
-	if claims.IsFromKeycloak {
+	// if claims.IsFromKeycloak {
 		// Uncomment nếu muốn validate với Keycloak mỗi request
 		// _, err := as.keycloakService.ValidateToken(tokenString)
 		// if err != nil {
 		//     return nil, fmt.Errorf("keycloak token validation failed: %w", err)
 		// }
-	}
+	// }
 
 	return claims, nil
 }
