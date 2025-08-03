@@ -5,7 +5,7 @@ type UserEntity struct {
 
 	UserId     string `json:"userId" gorm:"primaryKey;uniqueIndex;not null; size: 20"`
 	Email      string `json:"email" gorm:"uniqueIndex;not null;size:50"`
-	Username   string `json:"username" gorm:"uniqueIndex;not null;size:50"`
+	Username   string `json:"userName" gorm:"uniqueIndex;not null;size:50"`
 	Password   string `json:"-" gorm:"not null;size:50"`
 	FirstName  string `json:"firstName" gorm:"not null;size:25"`
 	LastName   string `json:"lastName" gorm:"not null;size:50"`
