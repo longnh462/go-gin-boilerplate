@@ -1,14 +1,15 @@
 package entitys
 
+import "github.com/google/uuid"
+
 type UserRole struct {
     BaseEntity
 
-    UserRoleId string `json:"userRoleId" gorm:"primaryKey;not null;size:20"`
-    UserID     string `json:"userId" gorm:"not null;index;size:20"`
-    RoleID     string `json:"roleId" gorm:"not null;index;size:20"`
-    IsActive   bool   `json:"isActive" gorm:"default:true"`
+    UserId     uuid.UUID `json:"user_id" gorm:"not null;primaryKey;index;size:36"`
+    RoleId     uuid.UUID `json:"role_id" gorm:"not null;primaryKey;index;size:36"`
+    IsActive   bool   `json:"is_active" gorm:"default:true"`
 
     // Relationships
-    User UserEntity `json:"user,omitempty" gorm:"foreignKey:UserID;references:UserId"`
-    Role RoleEntity `json:"role,omitempty" gorm:"foreignKey:RoleID;references:RoleId"`
+    User UserEntity `json:"users,omitempty" gorm:"foreignKey:UserId;references:UserId"`
+    Role RoleEntity `json:"roles,omitempty" gorm:"foreignKey:RoleId;references:RoleId"`
 }

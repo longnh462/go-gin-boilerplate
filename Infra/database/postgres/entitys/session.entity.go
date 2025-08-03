@@ -1,17 +1,21 @@
 package entitys
 
-import "time"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type SessionEntity struct {
 	BaseEntity
-	SessionId  string    `json:"sessionId" gorm:"primaryKey;uniqueIndex;not null;size:20"`
-	UserId     string    `json:"userId" gorm:"primaryKey;not null;index;size:20"`
+	SessionId  uuid.UUID    `json:"session_id" gorm:"primaryKey;uniqueIndex;not null;size:36"`
+	UserId     uuid.UUID    `json:"user_id" gorm:"primaryKey;not null;index;size:36"`
 	Token      string    `json:"token" gorm:"not null;size:255"`
-	ExpirestAt time.Time `json:"expiresAt" gorm:"not null"`
-	LastActive time.Time `json:"lastActive" gorm:"not null"`
-	IPAddress  string    `json:"ipAddress" gorm:"not null;size:45"` // IPv4 or IPv6
-	UserAgent  string    `json:"userAgent" gorm:"not null;size:255"`
-	IsActive   bool      `json:"isActive" gorm:"default:true"`
+	ExpirestAt time.Time `json:"expires_at" gorm:"not null"`
+	LastActive time.Time `json:"last_active" gorm:"not null"`
+	IPAddress  string    `json:"ip_address" gorm:"not null;size:45"` // IPv4 or IPv6
+	UserAgent  string    `json:"user_agent" gorm:"not null;size:255"`
+	IsActive   bool      `json:"is_active" gorm:"default:true"`
 
-	User UserEntity `json:"user,omitempty" gorm:"foreignKey:UserId;references:UserId"`
+	User UserEntity `json:"users,omitempty" gorm:"foreignKey:UserId;references:UserId"`
 }

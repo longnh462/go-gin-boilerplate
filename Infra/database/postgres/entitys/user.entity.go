@@ -1,18 +1,20 @@
 package entitys
 
+import "github.com/google/uuid"
+
 type UserEntity struct {
 	BaseEntity
 
-	UserId     string `json:"userId" gorm:"primaryKey;uniqueIndex;not null; size: 20"`
-	Email      string `json:"email" gorm:"uniqueIndex;not null;size:50"`
-	Username   string `json:"userName" gorm:"uniqueIndex;not null;size:50"`
-	Password   string `json:"-" gorm:"not null;size:50"`
-	FirstName  string `json:"firstName" gorm:"not null;size:25"`
-	LastName   string `json:"lastName" gorm:"not null;size:50"`
-	Phone      string `json:"phone" gorm:"not null;size:11"`
-	IsActive   bool   `json:"isActive" gorm:"default:false"`
-	IsVerified bool   `json:"isVerified" gorm:"default:false"`
+	UserId uuid.UUID `json:"user_id" gorm:"primaryKey;uniqueIndex;not null; size: 36"`
+	Email      string `gorm:"uniqueIndex;not null;size:100;index:idx_email"`
+	Username   string `json:"user_nm" gorm:"uniqueIndex;not null;size:50"`
+	Password   string `json:"usr_pw" gorm:"not null;size:100"`
+	FirstName  string `json:"first_nm" gorm:"not null;size:25"`
+	LastName   string `json:"last_nm" gorm:"not null;size:50"`
+	Phone      string `json:"usr_phone" gorm:"not null;size:11"`
+	IsActive   bool   `json:"is_active" gorm:"default:false"`
+	IsVerified bool   `json:"is_verified" gorm:"default:false"`
 
-	UserRoles []UserRole   `json:"userRoles,omitempty" gorm:"foreignKey:UserID"`
-	Roles     []RoleEntity `json:"roles,omitempty" gorm:"many2many:user_roles;"`
+	Roles     []RoleEntity    `json:"roles,omitempty" gorm:"many2many:user_roles;foreignKey:UserId;joinForeignKey:UserId;References:RoleId;joinReferences:RoleId"`
+	Sessions  []SessionEntity `json:"sessions,omitempty" gorm:"foreignKey:UserId;references:UserId;"`
 }
