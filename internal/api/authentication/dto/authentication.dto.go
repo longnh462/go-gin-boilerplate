@@ -6,5 +6,12 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	Token string `json:"token"`
+    Token        string `json:"token"`
+    RefreshToken string `json:"refresh_token,omitempty"`
+    Type         string `json:"type"` // "keycloak" or "local"
+    ExpiresIn    int    `json:"expires_in,omitempty"`
+}
+
+type RefreshTokenRequest struct {
+    RefreshToken string `json:"refresh_token" binding:"required"`
 }
