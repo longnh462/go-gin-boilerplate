@@ -34,11 +34,11 @@ func AuthMiddleware(authService *authentication.AuthService) gin.HandlerFunc {
 		}
 
 		// Set user info in context
-		c.Set("user_id", claims.UserId)
-		c.Set("username", claims.Username)
+		c.Set("userId", claims.UserId)
+		c.Set("userName", claims.Username)
 		c.Set("email", claims.Email)
 		c.Set("roles", claims.Roles)
-		c.Set("is_from_keycloak", claims.IsFromKeycloak)
+		c.Set("isFromKeycloak", claims.IsFromKeycloak)
 
 		c.Next()
 	}

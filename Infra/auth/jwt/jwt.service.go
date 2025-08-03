@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/google/uuid"
 )
 
 type JWTService struct {
@@ -12,7 +13,7 @@ type JWTService struct {
 }
 
 type Claims struct {
-	UserId         string   `json:"userId"`
+	UserId         uuid.UUID   `json:"userId"`
 	Email          string   `json:"email"`
 	Username       string   `json:"username"`
 	Roles          []string `json:"roles"`
@@ -26,7 +27,7 @@ func NewJWTService(secretKey string) *JWTService {
 	}
 }
 
-func (j *JWTService) GenerateToken(userId, email, username string, roles []string, isFromKeycloak bool) (string, error) {
+func (j *JWTService) GenerateToken(userId uuid.UUID, email, username string, roles []string, isFromKeycloak bool) (string, error) {
 	claims := Claims{
 		UserId:         userId,
 		Email:          email,
