@@ -1,0 +1,55 @@
+services: 
+  go-gin-db:
+    image: postgres:latest
+    container_name: go-gin-boilerplate-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - go-gin-network
+  
+  go-gin-redis:
+    image: redis:latest
+    container_name: go-gin-boilerplate-redis
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - go-gin-network
+  
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: go-gin-boilerplate-keycloak
+    env_file:
+      - .env
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://go-gin-db:5432/${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${KEYCLOAK_PORT}:8080"
+    depends_on:
+      - go-gin-db
+    networks:
+      - go-gin-network
+
+networks:
+  go-gin-network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
+  redis_data:
+    driver: local

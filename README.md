@@ -40,6 +40,7 @@ In this project, I built a template for the Backend part written in Go and using
 
 - [x] Database. Support [GORM](https://gorm.io/index.html) and [Postgres](https://github.com/lib/pq).
 - [ ] Seeding.
+- [x] RBAC (Role Base Access Control)
 - [ ] Authentication - Single session per user
 - [ ] Mailing ([viper](https://github.com/spf13/viper)).
 - [ ] Sign in and sign up via email.
