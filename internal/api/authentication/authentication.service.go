@@ -157,13 +157,13 @@ func (as *AuthService) verifyPassword(password, hashedPassword string) bool {
 	return err == nil
 }
 
-func (as *AuthService) hashPassword(password string) (string, error) {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return "", err
-	}
-	return string(hashedPassword), nil
-}
+// func (as *AuthService) hashPassword(password string) (string, error) {
+// 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+// 	if err != nil {
+// 		return "", err
+// 	}
+// 	return string(hashedPassword), nil
+// }
 
 type UserInfo struct {
 	UserID   uuid.UUID
