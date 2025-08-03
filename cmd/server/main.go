@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/longnh462/go-gin-boilerplate/docs"
 	"github.com/longnh462/go-gin-boilerplate/internal/configs"
+	"github.com/longnh462/go-gin-boilerplate/internal/routes"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -52,14 +53,21 @@ func main() {
 	router := gin.Default()
 
 	// API v1 route group
-    v1 := router.Group("/api/v1")
-    {
-        v1.GET("/swagger", func(context *gin.Context) {
-            context.JSON(200, gin.H{
-                "message": "Welcome to Go Gin Boilerplate API v1",
-            })
-        })
-    }
+	v1 := router.Group("/api/v1")
+	{
+		v1.GET("/", func(context *gin.Context) {
+			context.JSON(200, gin.H{
+				"message": "Welcome to Go Gin Boilerplate API v1",
+				"status":  "healthy",
+			})
+		})
+
+		// Setup authentication routes
+		routes.SetupAuthRoutes(v1, sqlDB)
+
+		// Setup protected routes
+		routes.SetupProtectedRoutes(v1, sqlDB)
+	}
 
 	router.GET("/swaggo/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
