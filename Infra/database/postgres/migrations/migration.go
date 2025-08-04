@@ -1,15 +1,15 @@
 package migrations
 
-import (
-    "github.com/longnh462/go-gin-boilerplate/Infra/database/postgres/entitys"
-    "gorm.io/gorm"
-)
+// import (
+//     "github.com/longnh462/go-gin-boilerplate/Infra/database/postgres/entitys"
+//     "gorm.io/gorm"
+// )
 
-func AutoMigrate(db *gorm.DB) error {
-    return db.AutoMigrate(
-        &entitys.SessionEntity{},
-        &entitys.UserEntity{},
-        &entitys.RoleEntity{},
-        &entitys.UserRole{},
-    )
-}
+// func AutoMigrate(db *gorm.DB) error {
+//     return db.AutoMigrate(
+//         &entitys.SessionEntity{},
+//         &entitys.UserEntity{},
+//         &entitys.RoleEntity{},
+//         &entitys.UserRole{},
+//     )
+// }
