@@ -17,5 +17,4 @@ type SessionEntity struct {
 	UserAgent  string    `json:"user_agent" gorm:"not null;size:255"`
 	IsActive   bool      `json:"is_active" gorm:"default:true"`
 
-	User UserEntity `json:"users,omitempty" gorm:"foreignKey:UserId;references:UserId"`
 }

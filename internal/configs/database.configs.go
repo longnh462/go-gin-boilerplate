@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/longnh462/go-gin-boilerplate/Infra/database/postgres/migrations"
+	// "github.com/longnh462/go-gin-boilerplate/Infra/database/postgres/migrations"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -61,9 +61,9 @@ func ConnectDb() (*gorm.DB, error) {
 	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetMaxOpenConns(100)
 
-	if err:= migrations.AutoMigrate(db); err != nil {
-		return nil, fmt.Errorf("failed to run migrations: %w", err)
-	}
+	// if err:= migrations.AutoMigrate(db); err != nil {
+	// 	return nil, fmt.Errorf("failed to run migrations: %w", err)
+	// }
 
 	return db, nil
 }
