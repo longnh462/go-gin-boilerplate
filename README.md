@@ -47,7 +47,7 @@ In this project, I built a template for the Backend part written in Go and using
 - [x] Social sign in (Apple, Facebook, Google).
 - [x] Admin and User roles.
 - [x] Internationalization/Translations (I18N) ([go-i18n](https://github.com/nicksnyder/go-i18n)).
-- [x] File uploads. Support local and Amazon S3 drivers.
+- [ ] File uploads. Support local and Amazon S3 drivers.
 - [x] Swagger.
 - [x] E2E and units tests.
 - [x] Docker.

@@ -16,5 +16,6 @@ type UserEntity struct {
 	IsVerified bool   `json:"is_verified" gorm:"default:false"`
 
 	// Relationships
-	Role RoleEntity `json:"role" gorm:"foreignKey:RoleId;references:RoleId;"`
+	Role RoleEntity `json:"role,omitempty" gorm:"foreignKey:RoleId;references:RoleId;"`
+	Sessions []SessionEntity `json:"sessions,omitempty" gorm:"foreignKey:UserId;references:UserId"`
 }
