@@ -67,6 +67,11 @@ cp env.example .env
 ```
 go mod download
 ```
+4. Before run migration you first have to create ggp schema
+```
+CREATE SCHEMA ggb;
+```
+Then run migration will create another schema is keycloak
 
 
 
