@@ -1,59 +1,37 @@
 #!/bin/bash
+set -e
 
-# Load environment variables from .env file
+# Resolve script dir to load .goose.env reliably
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 set -a
-source .goose.env
+source "$SCRIPT_DIR/.goose.env"
 set +a
 
-# Function to run migration commands
+# Normalize migration dir if it's relative
+case "$GOOSE_MIGRATION_DIR" in
+  (/*) ;;  # absolute, keep
+  (*) GOOSE_MIGRATION_DIR="$(cd "$SCRIPT_DIR/.." && pwd)/${GOOSE_MIGRATION_DIR#./}";;
+esac
+
 run_goose() {
-    echo $GOOSE_MIGRATION_DIR
-    echo $GOOSE_DRIVER
-    echo $GOOSE_DBSTRING
-
-
-    goose -dir "$GOOSE_MIGRATION_DIR" "$GOOSE_DRIVER" "$GOOSE_DBSTRING" "$@"
+  # New goose CLI: goose -dir DIR <command> (driver/dbstring từ env)
+  GOOSE_DRIVER="$GOOSE_DRIVER" GOOSE_DBSTRING="$GOOSE_DBSTRING" \
+    goose -dir "$GOOSE_MIGRATION_DIR" "$@"
 }
 
-# Parse command line arguments
 case "$1" in
-    ("up")
-        echo "Running migrations up..."
-        run_goose up
-        ;;
-    ("down")
-        echo "Running migrations down..."
-        run_goose down
-        ;;
-    ("status")
-        echo "Checking migration status..."
-        run_goose status
-        ;;
-    ("create")
-        if [ -z "$2" ]; then
-            echo "Usage: $0 create <migration_name>"
-            exit 1
-        fi
-        echo "Creating new migration: $2"
-        run_goose create "$2" sql
-        ;;
-    ("version")
-        echo "Checking current version..."
-        run_goose version
-        ;;
-    ("reset")
-        echo "Resetting database..."
-        run_goose reset
-        ;;
-    (*)
-        echo "Usage: $0 {up|down|status|create <name>|version|reset}"
-        echo "Examples:"
-        echo "  $0 up                    - Run all pending migrations"
-        echo "  $0 down                  - Rollback one migration"
-        echo "  $0 status                - Show migration status"
-        echo "  $0 create add_users      - Create new migration"
-        echo "  $0 version               - Show current version"
-        echo "  $0 reset                 - Reset all migrations"
-        exit 1
-        ;;
+  (up|down|status|version|reset)
+    echo "Running migrations $1..."
+    run_goose "$1"
+    ;;
+  (create)
+    [ -z "$2" ] && { echo "Usage: $0 create <name>"; exit 1; }
+    echo "Creating new migration: $2"
+    run_goose create "$2" sql
+    ;;
+  (*)
+    echo "Usage: $0 {up|down|status|create <name>|version|reset}"
+    exit 1
+    ;;
 esac
