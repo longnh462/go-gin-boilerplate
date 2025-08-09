@@ -17,6 +17,7 @@ type DatabaseConfig struct {
 	DBName   string
 	Port     string
 	Sslmode  string
+	Schema   string
 }
 
 func getEnv(key, defaultValue string) string {
@@ -33,12 +34,21 @@ func GetDatabaseConfig() *DatabaseConfig {
 		Password: getEnv("POSTGRES_PASSWORD", "postgres"),
 		DBName:   getEnv("POSTGRES_DB", "go-gin-boilerplate"),
 		Port:     getEnv("POSTGRES_PORT", "5432"),
-		Sslmode:  getEnv("POSTGRES_SSL","disable"),
+		Sslmode:  getEnv("POSTGRES_SSL", "disable"),
+		Schema:   getEnv("POSTGRES_SCHEMA", "ggb"),
 	}
 }
 
 func (config *DatabaseConfig) getDbConnectionString() string {
-	return "host=" + config.Host + " user=" + config.User + " password=" + config.Password + " dbname=" + config.DBName + " port=" + config.Port + " sslmode=disable"
+	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s options=-csearch_path=%s",
+		config.Host,
+		config.User,
+		config.Password,
+		config.DBName,
+		config.Port,
+		config.Sslmode,
+		config.Schema,
+	)
 }
 
 func ConnectDb() (*gorm.DB, error) {
