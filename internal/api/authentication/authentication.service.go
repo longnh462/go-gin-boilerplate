@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/google/uuid"
-	"github.com/longnh462/go-gin-boilerplate/Infra/auth/jwt"
-	"github.com/longnh462/go-gin-boilerplate/Infra/auth/keycloak"
+	"github.com/longnh462/go-gin-boilerplate/infra/auth/jwt"
+	"github.com/longnh462/go-gin-boilerplate/infra/auth/keycloak"
 	"github.com/longnh462/go-gin-boilerplate/internal/api/authentication/dto"
 	"golang.org/x/crypto/bcrypt"
 )

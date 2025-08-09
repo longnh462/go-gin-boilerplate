@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/google/uuid"
-	"github.com/longnh462/go-gin-boilerplate/Infra/database/postgres/entitys"
+	"github.com/longnh462/go-gin-boilerplate/infra/database/postgres/entitys"
 )
 
 type AuthRepository struct {
