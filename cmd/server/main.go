@@ -8,7 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/longnh462/go-gin-boilerplate/docs"
 	"github.com/longnh462/go-gin-boilerplate/internal/configs"
-	"github.com/longnh462/go-gin-boilerplate/internal/routes"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -61,12 +60,6 @@ func main() {
 				"status":  "healthy",
 			})
 		})
-
-		// Setup authentication routes
-		routes.SetupAuthRoutes(v1, sqlDB)
-
-		// Setup protected routes
-		routes.SetupProtectedRoutes(v1, sqlDB)
 	}
 
 	router.GET("/swaggo/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
