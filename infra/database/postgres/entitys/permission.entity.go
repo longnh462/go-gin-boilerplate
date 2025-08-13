@@ -10,5 +10,5 @@ type PermissionEntity struct {
 	IsActive bool      `json:"is_active" gorm:"default:true"`
 
 	// Relationships
-	Roles []RoleEntity `json:"roles,omitempty" gorm:"many2many:role_permissions;"`
+	RolePermissions []RolePermissionEntity `json:"role_permissions,omitempty" gorm:"foreignKey:PermId;references:PermId"`
 }
