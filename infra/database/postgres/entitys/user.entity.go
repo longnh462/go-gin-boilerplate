@@ -4,9 +4,9 @@ import "github.com/google/uuid"
 
 type UserEntity struct {
 	BaseEntity
-	UserId     uuid.UUID `json:"user_id" gorm:"primaryKey;uniqueIndex;not null; size: 36"`
+	UserId     uuid.UUID `json:"user_id" gorm:"primaryKey;uniqueIndex;not null;size:36;type:uuid;default:uuid_generate_v4()"`
 	RoleId     uuid.UUID `json:"role_id" gorm:"not null;size:36;index:idx_role_id"`
-	Email      string    `gorm:"uniqueIndex;not null;size:100;index:idx_email"`
+	Email      string    `gorm:"uniqueIndex;not null;size:100"`
 	Username   string    `json:"user_nm" gorm:"uniqueIndex;not null;size:50"`
 	Password   string    `json:"usr_pw" gorm:"not null;size:100"`
 	FirstName  string    `json:"first_nm" gorm:"not null;size:25"`
@@ -19,3 +19,5 @@ type UserEntity struct {
 	Role     RoleEntity      `json:"role,omitempty" gorm:"foreignKey:RoleId;"`
 	Sessions []SessionEntity `json:"sessions,omitempty" gorm:"foreignKey:UserId;references:UserId"`
 }
+
+func (UserEntity) TableName() string { return "users" }
