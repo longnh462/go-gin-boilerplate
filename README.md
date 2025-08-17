@@ -68,6 +68,8 @@ cp env.example .env
 go mod download
 ```
 4. Before run migration you first have to create ggp schema
+
+Use this command or create directly on your tool like [dbeaver](https://dbeaver.io/)
 ```
 CREATE SCHEMA ggb;
 ```

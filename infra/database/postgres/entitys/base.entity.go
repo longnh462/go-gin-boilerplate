@@ -7,9 +7,9 @@ import (
 )
 
 type BaseEntity struct {
-	CreateAt  time.Time      `json:"create_At" gorm:"autoCreateTime"`
-	UpdateAt  time.Time      `json:"update_At" gorm:"autoCreateTime"`
-	CreateUsr string         `json:"create_usr" gorm:"size:25;not null;default:'system'"`
-	UpdateUsr string         `json:"update_usr" gorm:"size:25;not null;default:'system'"`
+	CreatedAt time.Time      `json:"create_At" gorm:"column:create_at;autoCreateTime"`
+	UpdatedAt time.Time      `json:"update_At" gorm:"column:update_at;autoCreateTime"`
+	CreatedBy string         `json:"create_by" gorm:"column:created_by;size:36;not null;type:uuid"`
+	UpdatedBy string         `json:"update_usr" gorm:"column:updated_by;size:36;not null;type:uuid"`
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
