@@ -10,7 +10,7 @@ type RoleEntity struct {
 	IsActive bool      `json:"is_active" gorm:"default:true"`
 
 	// Relationships
-	Users           []UserEntity           `json:"users,omitempty" gorm:"foreignKey:RoleId"`
+	UserRole []UserRoleEntity `json:"user_role,omitempty" gorm:"foreignKey:RoleId;references:RoleId;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
 	RolePermissions []RolePermissionEntity `json:"role_permissions,omitempty" gorm:"foreignKey:RoleId;references:RoleId"`
 }
 
