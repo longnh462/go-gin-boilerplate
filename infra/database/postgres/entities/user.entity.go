@@ -1,11 +1,10 @@
-package entitys
+package entities
 
 import "github.com/google/uuid"
 
 type UserEntity struct {
 	BaseEntity
 	UserId     uuid.UUID `json:"user_id" gorm:"primaryKey;uniqueIndex;not null;size:36;type:uuid;default:uuid_generate_v4()"`
-	RoleId     uuid.UUID `json:"role_id" gorm:"not null;size:36;index:idx_role_id"`
 	Email      string    `gorm:"uniqueIndex;not null;size:100"`
 	Username   string    `json:"user_nm" gorm:"uniqueIndex;not null;size:50"`
 	Password   string    `json:"usr_pw" gorm:"not null;size:100"`
@@ -16,7 +15,7 @@ type UserEntity struct {
 	IsVerified bool      `json:"is_verified" gorm:"default:false"`
 
 	// Relationships
-	Role     RoleEntity      `json:"role,omitempty" gorm:"foreignKey:RoleId;"`
+	UserRole []UserRoleEntity `json:"user_role,omitempty" gorm:"foreignKey:UserId;references:UserId;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
 	Sessions []SessionEntity `json:"sessions,omitempty" gorm:"foreignKey:UserId;references:UserId"`
 }
 

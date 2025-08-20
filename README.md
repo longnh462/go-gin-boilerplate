@@ -43,6 +43,7 @@ In this project, I built a template for the Backend part written in Go and using
 - [x] RBAC (Role Base Access Control)
 - [x] Authentication - Single session per user
 - [x] Mailing ([viper](https://github.com/spf13/viper)).
+- [x] Hot reload with air
 - [x] Sign in and sign up via email.
 - [x] Social sign in (Apple, Facebook, Google).
 - [x] Admin and User roles.
